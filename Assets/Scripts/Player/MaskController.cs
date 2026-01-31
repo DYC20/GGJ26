@@ -25,7 +25,7 @@ public class MaskController : MonoBehaviour
         {
             if (resurve == null)
             {
-                changeMask?.Invoke(false);
+                
                 return;
             }
 
@@ -34,7 +34,6 @@ public class MaskController : MonoBehaviour
 
             resurve = carry;
             carry = null;
-            changeMask?.Invoke(true);
         }
     }
 
