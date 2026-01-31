@@ -64,9 +64,67 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: -6
+            inSlope: 0.14472474
+            outSlope: 0.14472474
+            tangentMode: 0
+            weightedMode: 3
+            inWeight: 0
+            outWeight: 0.58903396
+          - serializedVersion: 3
+            time: 1
+            value: 0.02231729
+            inSlope: 13.773865
+            outSlope: 181.85457
+            tangentMode: 1
+            weightedMode: 3
+            inWeight: 0.36618856
+            outWeight: 0.039905135
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: VelocityCurve
+        m_Overridden: 1
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0, g: 0, b: 0, a: 1}
+          key1: {r: 0.4086139, g: 0, b: 2.670157, a: 0}
+          key2: {r: 0, g: 0, b: 0, a: 0}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 31330
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 31409
+          atime2: 59917
+          atime3: 0
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_ColorSpace: 1
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 2
+        m_Name: Color
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
