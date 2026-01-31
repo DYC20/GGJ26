@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.XR;
 [RequireComponent(typeof(CombatController))]
 public class PlayerController : MonoBehaviour, Damageable<float>
 {
-    private InputSystem_Actions playerInput;
+    public InputSystem_Actions playerInput;
     private FrameInput _frameInput;
     private SmartSwitch jumpSwtich;
     private SmartSwitch dashSwitch;
@@ -33,11 +33,18 @@ public class PlayerController : MonoBehaviour, Damageable<float>
     private void OnEnable()
     {
         playerInput.Player.Enable();
+        playerInput.Player.Attack.performed += combatController.Attack;
+        playerInput.Player.Powerup.started += combatController.HeavyAttack;
+        playerInput.Player.Powerup.canceled += combatController.HeavyAttack;
+
 
     }
     private void OnDisable()
     {
         playerInput.Player.Disable();
+        playerInput.Player.Attack.performed -= combatController.Attack;
+        playerInput.Player.Powerup.started -= combatController.HeavyAttack;
+        playerInput.Player.Powerup.canceled -= combatController.HeavyAttack;
 
     }
     private void GatherInput()

@@ -44,8 +44,6 @@ namespace TarodevController
 
         private bool _cachedQueryStartInColliders;
 
-        private InputSystem_Actions playerInput;
-
         private SmartSwitch jumpSwtich;
         private bool dubleJumpCheck;
 
@@ -74,20 +72,6 @@ namespace TarodevController
             };
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
-            playerInput = new InputSystem_Actions();
-        }
-
-        private void OnEnable()
-        {
-            playerInput.Player.Move.Enable();
-            playerInput.Player.Jump.Enable();
-
-        }
-        private void OnDisable()
-        {
-            playerInput.Player.Move.Disable();
-            playerInput.Player.Jump.Enable();
-
         }
 
         private void Update()

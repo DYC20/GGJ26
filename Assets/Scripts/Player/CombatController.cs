@@ -10,16 +10,18 @@ using static Unity.VisualScripting.Member;
 
 public class CombatController : MonoBehaviour
 {
-    private InputSystem_Actions playerInput;
     private CharacterMovement movenet;
     [SerializeField] private LayerMask characterLayerMask;
     [SerializeField] public bool _RangeAttack = false;
+    [SerializeField] public bool _HeavyAttack = false;
 
     private ProjactileLogic plg;
     [Header("Projectle Logic")]
     public ObjectPool amunition;
 
     public Action OnRegularAttack;
+    public Action OnHeavyAttackCharge;
+    public Action<bool> OnHeavyAttackRelease;
 
     public ObjectPool Amunition
     {
@@ -34,31 +36,54 @@ public class CombatController : MonoBehaviour
         }
     }
 
+    [Header("Heavy Attack")]
+    [SerializeField] private float heavyChargeTime = 1.2f;
+    [SerializeField] private float heavyCooldown = 2.5f;
+    [SerializeField] private float heavyDamage = 35f;
+    [SerializeField] private float heavyRange = 1.8f;
+
+    private float heavyChargeStart;
+    private float lastHeavyAttackTime = -999f;
+    private bool isChargingHeavy;
+
+
 
     void Awake()
     {
         movenet = GetComponent<CharacterMovement>();
-        playerInput = new InputSystem_Actions();
-    }
-
-    private void OnEnable()
-    {
-        playerInput.Player.Attack.Enable();
-        playerInput.Player.Attack.performed += Attack;
-
     }
     private void OnDisable()
     {
-        playerInput.Player.Attack.performed -= Attack;
-        playerInput.Player.Attack.Disable();
+        isChargingHeavy = false;
     }
 
-    private void Attack(InputAction.CallbackContext ctx)
+    #region Attack Interface
+    public void Attack(InputAction.CallbackContext ctx)
     {
         if (_RangeAttack) RangeAttack();
         else RegularAttack();
     }
 
+    public void HeavyAttack(InputAction.CallbackContext ctx)
+    {
+        if (!_HeavyAttack)
+        {
+            return;
+        }
+        // Button pressed
+        if (ctx.started)
+        {
+            StartHeavyCharge();
+        }
+
+        // Button released
+        if (ctx.canceled)
+        {
+            ReleaseHeavyAttack();
+        }
+    }
+    #endregion
+    #region RegularAttack
     private void RegularAttack()
     {
         Debug.Log("Attack");
@@ -80,7 +105,8 @@ public class CombatController : MonoBehaviour
         }
 
     }
-
+    #endregion
+    #region RangedAttack
     private void RangeAttack()
     {
         GameObject bullet = Amunition.GetInstance(this.transform.position);
@@ -96,23 +122,65 @@ public class CombatController : MonoBehaviour
         plg.Damage = this.plg.Damage;
         plg.SetTarget(mouseWorldPos, this.gameObject);
     }
-
-    private void HeavyAttack()
+    #endregion
+    #region HeavyAttack
+    private void StartHeavyCharge()
     {
+        if (Time.time < lastHeavyAttackTime + heavyCooldown)
+            return;
+
+        isChargingHeavy = true;
+        heavyChargeStart = Time.time;
+
+        Debug.Log("Heavy attack charging...");
+        OnHeavyAttackCharge.Invoke();
+    }
+
+    private void ReleaseHeavyAttack()
+    {
+        if (!isChargingHeavy)
+            return;
+
+        isChargingHeavy = false;
+
+        float chargeTime = Time.time - heavyChargeStart;
+
+        if (chargeTime < heavyChargeTime)
+        {
+            Debug.Log("Heavy attack canceled (not charged)");
+            OnHeavyAttackRelease.Invoke(false);
+            return;
+        }
+
+        ExecuteHeavyAttack();
+    }
+    private void ExecuteHeavyAttack()
+    {
+        lastHeavyAttackTime = Time.time;
+
+        Debug.Log("HEAVY ATTACK!");
+        OnHeavyAttackRelease.Invoke(true);
+        Vector3 offset =
+            movenet.direction.x > 0f ? Vector3.right : Vector3.left;
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(
-            this.transform.position + (movenet.direction.x > 0f ? Vector3.right : Vector3.left),
-            1f,
+            transform.position + offset,
+            heavyRange,
             characterLayerMask
         );
 
         foreach (Collider2D hit in hits)
         {
-            Debug.Log("Hit: " + hit.name);
-            Damageable<float> dmg = hit.gameObject.GetComponent<Damageable<float>>();
-            if (dmg != null && hit.gameObject != this)
+            if (hit.gameObject == gameObject) continue;
+
+            Damageable<float> dmg = hit.GetComponent<Damageable<float>>();
+            if (dmg != null)
             {
-                dmg.OnDamage(50f);
+                dmg.OnDamage(heavyDamage);
             }
         }
     }
+
+    #endregion
+
 }

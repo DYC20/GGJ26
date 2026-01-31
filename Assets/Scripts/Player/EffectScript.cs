@@ -56,8 +56,13 @@ public class EffectScript : MonoBehaviour
             landingSwitch.Update(characterMovement._grounded);
 
 
-            walkingParticles.gameObject.SetActive(characterMovement._grounded);
-
+            if(characterMovement._grounded)
+            {
+                walkingParticles.Play();
+            }else
+            {
+                walkingParticles.Stop();
+            }
 
             if(landingSwitch.OnPress())
             {
