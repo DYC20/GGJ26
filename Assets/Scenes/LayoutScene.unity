@@ -1555,6 +1555,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3277868645395595377, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: currentMask
+      value: 
+      objectReference: {fileID: 11400000, guid: 527a2a0d22ef82e41836f01fc3b736c2, type: 2}
     - target: {fileID: 3399990837162305140, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
       propertyPath: m_IsActive
       value: 0
