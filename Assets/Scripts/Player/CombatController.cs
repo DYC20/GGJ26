@@ -51,6 +51,8 @@ public class CombatController : MonoBehaviour
     void Awake()
     {
         movenet = GetComponent<CharacterMovement>();
+        OnHeavyAttackCharge = () => { };
+        OnHeavyAttackRelease = (a) => { };
     }
     private void OnDisable()
     {
@@ -93,6 +95,8 @@ public class CombatController : MonoBehaviour
             1f,
             characterLayerMask
         );
+
+        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 10f);
 
         foreach (Collider2D hit in hits)
         {
@@ -160,6 +164,7 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("HEAVY ATTACK!");
         OnHeavyAttackRelease.Invoke(true);
+        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 30f);
         Vector3 offset =
             movenet.direction.x > 0f ? Vector3.right : Vector3.left;
 

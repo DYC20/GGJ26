@@ -283,7 +283,15 @@ namespace TarodevController
         }
 
         #endregion
+        #region Effects
 
+        public void NuckRepale(Vector2 direction, float force)
+        {
+            direction.Normalize();
+            _frameVelocity = direction * force;
+        }
+
+        #endregion
         private void ApplyMovement() => _rb.linearVelocity = _frameVelocity; 
 
 #if UNITY_EDITOR

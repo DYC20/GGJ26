@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.XR;
 [RequireComponent(typeof(CombatController))]
 public class PlayerController : MonoBehaviour, Damageable<float>
 {
-    public InputSystem_Actions playerInput;
+    private InputSystem_Actions playerInput;
     private FrameInput _frameInput;
     private SmartSwitch jumpSwtich;
     private SmartSwitch dashSwitch;
