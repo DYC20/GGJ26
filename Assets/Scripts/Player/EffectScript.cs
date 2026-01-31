@@ -15,7 +15,12 @@ public class EffectScript : MonoBehaviour
 
     [Header("Powerups Effects")]
     [SerializeField] private VisualEffect DashVisualEffect;
-    [SerializeField] private VisualEffect HeavyAttackVisualEffect;
+
+    [SerializeField] private VisualEffect HeavyattackChargeVsualEffect;
+    [SerializeField] private VisualEffect HeavyattackChargeHoldVsualEffect;
+
+    [SerializeField] private VisualEffect HeavyattackVsualEffectLeft;
+    [SerializeField] private VisualEffect HeavyattackVsualEffectRight;
 
 
     #region Depndences
@@ -122,6 +127,47 @@ public class EffectScript : MonoBehaviour
                     DashVisualEffect.Play();
                 }
             };
+
+            combatcontroller.OnHeavyAttackCharge += () =>
+            {
+                if (HeavyattackChargeVsualEffect.gameObject.activeSelf == false) HeavyattackChargeVsualEffect.gameObject.SetActive(true);
+                HeavyattackChargeVsualEffect.Play();
+            };
+            combatcontroller.OnHeavyAttackRelease += (a) =>
+            {
+                if (a == true)
+                {
+                    Vector3 dir = characterMovement.direction.x > 0f ? Vector3.right : Vector3.left;
+                    if (Vector3.Dot(dir, Vector3.right) > 0.9f)
+                    {
+                        if (HeavyattackVsualEffectRight.gameObject.activeSelf == false) HeavyattackVsualEffectRight.gameObject.SetActive(true);
+                        HeavyattackVsualEffectRight.Play();
+                    }
+                    else
+                    {
+                        if (HeavyattackVsualEffectLeft.gameObject.activeSelf == false) HeavyattackVsualEffectLeft.gameObject.SetActive(true);
+                        HeavyattackVsualEffectLeft.Play();
+                    }
+                }
+            };
+        }
+    }
+
+    float t_H = 0;
+    private void PowerupHandler()
+    {
+        if (_isCombatController)
+        {
+            if (combatcontroller.isChargingHeavy)
+            {
+                t_H += Time.deltaTime;
+                if (t_H > 0.2f)
+                {
+                    if (HeavyattackChargeHoldVsualEffect.gameObject.activeSelf == false) HeavyattackChargeHoldVsualEffect.gameObject.SetActive(true);
+                    HeavyattackChargeHoldVsualEffect.Play();
+                    t_H = 0f;
+                }
+            }
         }
     }
 
@@ -137,6 +183,7 @@ public class EffectScript : MonoBehaviour
     {
         MoventHandler();
         CombatEffectsHandler();
+        PowerupHandler();
     }
 
 }

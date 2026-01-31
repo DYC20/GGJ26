@@ -44,7 +44,7 @@ public class CombatController : MonoBehaviour
 
     private float heavyChargeStart;
     private float lastHeavyAttackTime = -999f;
-    private bool isChargingHeavy;
+    public bool isChargingHeavy { get; private set; }
 
 
 
@@ -96,7 +96,7 @@ public class CombatController : MonoBehaviour
             characterLayerMask
         );
 
-        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 10f);
+        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 8f);
 
         foreach (Collider2D hit in hits)
         {
@@ -164,7 +164,7 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("HEAVY ATTACK!");
         OnHeavyAttackRelease.Invoke(true);
-        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 30f);
+        movenet.NuckRepale(movenet.direction.x > 0f ? Vector3.right : Vector3.left, 12f);
         Vector3 offset =
             movenet.direction.x > 0f ? Vector3.right : Vector3.left;
 
