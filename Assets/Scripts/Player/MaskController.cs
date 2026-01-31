@@ -30,7 +30,7 @@ public class MaskController : MonoBehaviour
             }
 
             carry = maskHandler.mask;
-            maskHandler.mask = resurve;
+            maskHandler.EquipMask(resurve);
 
             resurve = carry;
             carry = null;
