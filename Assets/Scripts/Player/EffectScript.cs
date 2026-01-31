@@ -28,6 +28,7 @@ public class EffectScript : MonoBehaviour
     #region Depndences
     private CharacterMovement characterMovement;
     private CombatController combatcontroller;
+    private MaskHandler maskhandler;
     private Animator animator;
     #endregion
 
@@ -43,13 +44,20 @@ public class EffectScript : MonoBehaviour
     {
         _isCharacterMovement = TryGetComponent<CharacterMovement>(out characterMovement);
         _isCombatController = TryGetComponent<CombatController>(out combatcontroller);
+        maskhandler = gameObject.GetComponent<MaskHandler>();
         animator = GetComponentInChildren<Animator>();
         _isAnimator = animator != null;
 
+        if(maskhandler) maskhandler.maskChanged += OnChageSprite;
 
     }
 
     #region Movement Effects
+
+    public void OnChageSprite()
+    {
+        sprite.color = maskhandler.mask.Color;
+    }    
 
     private void initMovementEffects()
     {

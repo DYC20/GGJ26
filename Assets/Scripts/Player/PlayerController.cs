@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, Damageable<float>
         playerInput.Player.Enable();
         playerInput.Player.Attack.performed += combatController.Attack;
         playerInput.Player.Interact.performed += maskController.CollectMask;
+
         playerInput.Player.Switch.performed += maskController.ChangeMasks;
 
 

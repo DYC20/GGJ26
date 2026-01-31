@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,10 +116,10 @@ TextureImporter:
       name: Gemini_Generated_Image_1sqqfn1sqqfn1sqq_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 71
+        y: 512
+        width: 441
+        height: 440
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +130,72 @@ TextureImporter:
       bones: []
       spriteID: c2aa6d025560a1990800000000000000
       internalID: -7414606873819174356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_1sqqfn1sqqfn1sqq_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 435
+        height: 448
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa194fc7d0646b5459de8ebe93a8ceee
+      internalID: 11025310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_1sqqfn1sqqfn1sqq_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 93
+        width: 431
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a362e53a6e8a1f46aa7253668f74652
+      internalID: -608876564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_1sqqfn1sqqfn1sqq_3
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 82
+        width: 412
+        height: 430
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08617f193e202234ba03ea85d68821b3
+      internalID: 1511278417
       vertices: []
       indices: 
       edges: []
@@ -148,9 +214,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Gemini_Generated_Image_1sqqfn1sqqfn1sqq_0: -7414606873819174356
+      Gemini_Generated_Image_1sqqfn1sqqfn1sqq_1: 11025310
+      Gemini_Generated_Image_1sqqfn1sqqfn1sqq_2: -608876564
+      Gemini_Generated_Image_1sqqfn1sqqfn1sqq_3: 1511278417
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
