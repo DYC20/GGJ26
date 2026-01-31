@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49baa3d186a799543bc7a924e613ed8d, type: 3}
-  m_Name: Dash Mask
-  m_EditorClassIdentifier: Assembly-CSharp::DashMask
+  m_Script: {fileID: 11500000, guid: 4de1ae9c5ce69494794c9b8ca48e9b1e, type: 3}
+  m_Name: Heavy Attack Mask
+  m_EditorClassIdentifier: Assembly-CSharp::HeavyAttackMask
   maskColor: {r: 1, g: 1, b: 1, a: 1}
-  maskSprite: {fileID: -7414606873819174356, guid: cfec44fefe773e4498311f21249142ca, type: 3}
+  maskSprite: {fileID: -608876564, guid: cfec44fefe773e4498311f21249142ca, type: 3}

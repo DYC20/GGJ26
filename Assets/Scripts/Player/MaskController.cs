@@ -23,7 +23,7 @@ public class MaskController : MonoBehaviour
     {
         if (maskHandler != null)
         {
-            if (resurve != null)
+            if (resurve == null)
             {
                 changeMask?.Invoke(false);
                 return;
@@ -60,7 +60,7 @@ public class MaskController : MonoBehaviour
                     msk.SetMask(resurve);
                 }
                 resurve = dmg.CollectMask();
-                collectMask.Invoke();
+                collectMask?.Invoke();
                 return;
             }
         }
