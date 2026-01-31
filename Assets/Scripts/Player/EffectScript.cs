@@ -55,18 +55,13 @@ public class EffectScript : MonoBehaviour
             float speed = characterMovement.speed;
             landingSwitch.Update(characterMovement._grounded);
 
+
+            walkingParticles.gameObject.SetActive(characterMovement._grounded);
+
+
             if(landingSwitch.OnPress())
             {
                 landingParticles.Play();
-            }
-
-            if (Vector3.Dot(dir, Vector3.right) >0.9f)
-            {
-                walkingParticles.transform.eulerAngles = new Vector3(0f, 0f, 180f);
-            }
-            else
-            {
-                walkingParticles.transform.eulerAngles = new Vector3(0f, 0f, 0f);
             }
         }
     }
