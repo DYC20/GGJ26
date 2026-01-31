@@ -108,7 +108,7 @@ public class CombatController : MonoBehaviour
             Damageable<float> dmg = hit.gameObject.GetComponent<Damageable<float>>();
             if (dmg != null && hit.gameObject != this)
             {
-                dmg.OnDamage(10f);
+                dmg.OnDamage(43f);
             }
         }
 
