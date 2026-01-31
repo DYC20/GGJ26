@@ -34,9 +34,9 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -1954
+    x: -1901
     y: 619
-    width: 1127
+    width: 1075
     height: 2412
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   particlePerStripCount: 32
   needsComputeBounds: 0
   boundsMode: 0
-  m_Space: 1
+  m_Space: 0
 --- !u!114 &8926484042661615099
 MonoBehaviour:
   m_ObjectHideFlags: 0
