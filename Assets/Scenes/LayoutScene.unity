@@ -1221,6 +1221,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7427776787246126600, guid: 5f5bd4d9188121643b4dd8486a346706, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1547,17 +1551,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 191111447881516814, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
+    - target: {fileID: 2531676998406022097, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 191111447881516814, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
-      propertyPath: VelocityModule.inWorldSpace
-      value: 1
+    - target: {fileID: 3399990837162305140, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3638272690297484799, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893427272601589207, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416118892787894996, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5127584614877853254, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1597,6 +1609,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5127584614877853254, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533300756216871602, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035894838700715608, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109377756688295509, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396727501480322032, guid: dfd8ccc7330d6714cab116f91673d202, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
