@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53eff5c0c54209147b07e85db6a970e2, type: 3}
+  m_Name: EnemyPool
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  poolSize: 12
+  prefabe: {fileID: 3638272690297484799, guid: 8b24614412fe82f4993ff263238c2fb4, type: 3}

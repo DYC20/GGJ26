@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4499546045525367376}
   - component: {fileID: 1257762065917577370}
   m_Layer: 6
-  m_Name: Enemy2
+  m_Name: Enemy2 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da744427539c7bd478e4da3c13c611da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskHandler
-  currentMask: {fileID: 11400000, guid: a468c72bbfcbc77458a831c99f3365c0, type: 2}
+  currentMask: {fileID: 11400000, guid: 527a2a0d22ef82e41836f01fc3b736c2, type: 2}
 --- !u!114 &8831358198444889298
 MonoBehaviour:
   m_ObjectHideFlags: 0

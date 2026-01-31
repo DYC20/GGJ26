@@ -8,6 +8,7 @@ public class CamFollow : MonoBehaviour
     public GameObject target;
     public float horizontalSnapingStrangth = 5f;
     public float verticalSnapingStrangth = 10f;
+    public float y_Offset = 5f;
 
     private Vector3 offset;
     private bool _isTarget;
@@ -28,7 +29,7 @@ public class CamFollow : MonoBehaviour
         if (_isTarget)
         {
             float x = Mathf.Lerp(transform.position.x, target.transform.position.x, Time.deltaTime * horizontalSnapingStrangth);
-            float y = Mathf.Lerp(transform.position.y, target.transform.position.y, Time.deltaTime * verticalSnapingStrangth);
+            float y = Mathf.Lerp(transform.position.y, target.transform.position.y + y_Offset, Time.deltaTime * verticalSnapingStrangth);
 
 
                 float z = offset.z;

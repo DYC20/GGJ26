@@ -6,9 +6,16 @@ public class MaskItem : MonoBehaviour
     [SerializeField] private Mask maskSource;
     private SpriteRenderer spriteRenderer;
 
+    private float t = 7f;
     private void Awake()
     {
+
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        t = 7f;
     }
     public void SetMask(Mask msk)
     {
@@ -24,5 +31,14 @@ public class MaskItem : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         return maskSource;
+    }
+
+    private void Update()
+    {
+        t -= Time.deltaTime;
+        if (t < 0f)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }
