@@ -1,3 +1,4 @@
+using System;
 using TarodevController;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,8 @@ using UnityEngine.InputSystem.XR;
 [RequireComponent(typeof(CombatController))]
 public class PlayerController : MonoBehaviour, Damageable<float>
 {
+    [SerializeField] FloatVariable PlayerHealth;
+
     private InputSystem_Actions playerInput;
     private FrameInput _frameInput;
     private SmartSwitch jumpSwtich;
@@ -86,9 +89,16 @@ public class PlayerController : MonoBehaviour, Damageable<float>
         GatherInput();
     }
 
+    public event Action PlayerIsDead;
     public void OnDamage(float log)
     {
-        
+        PlayerHealth.value -= log;
+
+        if (PlayerHealth.value < 0f)
+        {
+            PlayerIsDead?.Invoke();
+            this.gameObject.SetActive(false);
+        }
     }
 
     public bool IsDead()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ public class MaskHandler : MonoBehaviour
     }
     [SerializeField] private Mask currentMask;
 
+    public event Action maskChanged;
+    
     public void Awake()
     {
         if (currentMask != null)
@@ -32,6 +35,7 @@ public class MaskHandler : MonoBehaviour
         if (currentMask != null)
             currentMask.Deactivate(gameObject);
 
+        maskChanged?.Invoke();
         currentMask = newMask;
 
         if (currentMask != null)

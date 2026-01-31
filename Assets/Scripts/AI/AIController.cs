@@ -1,11 +1,15 @@
+using Mono.Cecil;
 using TarodevController;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(AICharacterController2D))]
+[RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(CombatController))]
 public class AIController : MonoBehaviour, Damageable<float>
 {
+    public float health = 100f;
     private enum States
     {
         IDLE,
@@ -17,17 +21,23 @@ public class AIController : MonoBehaviour, Damageable<float>
     private GameObject player;
     private AICharacterController2D agent;
     private CharacterMovement movment;
+    private CombatController combatController;
+    private MaskHandler handler;
     [SerializeField] private LayerMask characterLayerMask;
-    [SerializeField] private FloatReference AttackRange;
+    [SerializeField] private ObjectPool MaskPool;
 
     private SmartSwitch stSwitch;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         movment = gameObject.GetComponent<CharacterMovement>();
+        combatController = gameObject.GetComponent<CombatController>();
+        handler = gameObject.GetComponent<MaskHandler>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent = gameObject.GetComponent<AICharacterController2D>();
         t = Random.value * 0.2f;
+
+        handler.maskChanged += ChangedMask;
     }
 
     private void SetStateGraph()
@@ -46,10 +56,15 @@ public class AIController : MonoBehaviour, Damageable<float>
             case States.ATTACK:
                 Debug.Log("Attack");
                 agent.EnableAgnet(false);
-                Attack();
+                combatController.Attack();
                 break;
 
         }
+    }
+
+    private void ChangedMask()
+    {
+
     }
 
     private void checkState()
@@ -65,14 +80,27 @@ public class AIController : MonoBehaviour, Damageable<float>
                 break;
 
             case States.CHASE:
-                if (agent._hasTarget && agent._reachedTarget)
+                if (combatController._RangeAttack)
                 {
-                    states = States.ATTACK;
+                    if (!CommonFunctions.IsClose(this.transform.position, player.transform.position, 7f))
+                    {
+                        states = States.ATTACK;
+                    }
+                }
+                else
+                {
+                    if (agent._hasTarget && agent._reachedTarget)
+                    {
+                        states = States.ATTACK;
+                    }
                 }
                 break;
 
             case States.ATTACK:
-                if (!CommonFunctions.IsClose(this.transform.position, player.transform.position, AttackRange.Value))
+
+                float rg = combatController._RangeAttack ? 7f: 1.2f;
+
+                if (!CommonFunctions.IsClose(this.transform.position, player.transform.position, rg))
                 {
                     states = States.CHASE;
                 }
@@ -83,6 +111,7 @@ public class AIController : MonoBehaviour, Damageable<float>
     // Update is called once per frame
 
     float t = 0f;
+    float t_A = 0f;
     void Update()
     {
         t += Time.deltaTime;
@@ -90,6 +119,20 @@ public class AIController : MonoBehaviour, Damageable<float>
         {
             checkState();
             t = 0f;
+        }
+
+        switch (states)
+        {
+
+            case States.ATTACK:
+                t_A += Time.deltaTime;
+                if (t_A > 0.3f)
+                {
+                    t_A = 0f;
+                    combatController.Attack();
+                }
+                break;
+
         }
 
         stSwitch.Update(oldstates == states);
@@ -100,31 +143,19 @@ public class AIController : MonoBehaviour, Damageable<float>
         oldstates = states;
     }
 
-    private void Attack()
-    {
-        Debug.Log("Attack");
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(
-            this.transform.position + (movment.direction.x > 0f ? Vector3.right : Vector3.left),
-            1f,
-            characterLayerMask
-        );
-
-        foreach (Collider2D hit in hits)
-        {
-            Debug.Log("Hit: " + hit.name);
-            Damageable<float> dmg = hit.gameObject.GetComponent<Damageable<float>>();
-            if (dmg != null && hit.gameObject != this)
-            {
-                dmg.OnDamage(10f);
-            }
-        }
-    }
-
     public void OnDamage(float log)
     {
-        Debug.Log("Enemy " + this.name + " Got hit! " + log + " Damage");
-        //throw new System.NotImplementedException();
+        health -= log;
+
+        if (health < 0f)
+        {
+            this.gameObject.SetActive(false);
+            if (handler.mask != null)
+            {
+                MaskItem msk = MaskPool.GetInstance(this.transform.position).gameObject.GetComponent<MaskItem>();
+                msk.SetMask(handler.mask);
+            }
+        }
     }
 
     public bool IsDead()

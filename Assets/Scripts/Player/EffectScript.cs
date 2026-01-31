@@ -4,6 +4,8 @@ using UnityEngine.VFX;
 
 public class EffectScript : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer sprite;
+
     [Header("Movement Effects")]
     [SerializeField] private ParticleSystem walkingParticles;
     [SerializeField] private ParticleSystem landingParticles;
@@ -26,11 +28,13 @@ public class EffectScript : MonoBehaviour
     #region Depndences
     private CharacterMovement characterMovement;
     private CombatController combatcontroller;
+    private Animator animator;
     #endregion
 
     #region flags
     private bool _isCharacterMovement;
     private bool _isCombatController;
+    private bool _isAnimator;
     #endregion
 
     SmartSwitch landingSwitch;
@@ -39,6 +43,8 @@ public class EffectScript : MonoBehaviour
     {
         _isCharacterMovement = TryGetComponent<CharacterMovement>(out characterMovement);
         _isCombatController = TryGetComponent<CombatController>(out combatcontroller);
+        animator = GetComponentInChildren<Animator>();
+        _isAnimator = animator != null;
 
 
     }
@@ -52,6 +58,8 @@ public class EffectScript : MonoBehaviour
             walkingParticles.Play();
         }
     }
+
+    SmartSwitch runswitch;
     private void MoventHandler()
     {
         if (_isCharacterMovement)
@@ -73,7 +81,39 @@ public class EffectScript : MonoBehaviour
             {
                 landingParticles.Play();
             }
+
+            if (_isAnimator)
+            {
+                sprite.flipX = characterMovement.direction.x <= 0f;
+                if (characterMovement._grounded)
+                {
+                    runswitch.Update(Mathf.Abs(characterMovement._rb.linearVelocity.magnitude) > 0.1f);
+                    if (runswitch.OnPress())
+                    {
+                        animator.Play("Run");
+                    }
+                    if (runswitch.OnRelese())
+                    {
+                        animator.Play("Idle");
+                    }
+                }
+                else
+                {
+                    //in the air
+                    if(characterMovement._rb.linearVelocity.y > 0f)
+                    {
+                        animator.Play("Jump");
+                    }
+                    else
+                    {
+                        animator.Play("Falling");
+                    }
+
+                }
+            }
         }
+
+        
     }
     #endregion
 
@@ -84,6 +124,7 @@ public class EffectScript : MonoBehaviour
         if (_isCombatController)
         {
             combatcontroller.OnRegularAttack += () => {
+                if (animator) animator.Play("Attack");
                 Vector3 dir = characterMovement.direction.x > 0f ? Vector3.right : Vector3.left;
                 if (Vector3.Dot(dir, Vector3.right) > 0.9f)
                 {
@@ -137,6 +178,7 @@ public class EffectScript : MonoBehaviour
             {
                 if (a == true)
                 {
+                    if(animator) animator.Play("Attack");
                     Vector3 dir = characterMovement.direction.x > 0f ? Vector3.right : Vector3.left;
                     if (Vector3.Dot(dir, Vector3.right) > 0.9f)
                     {

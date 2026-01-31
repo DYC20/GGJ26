@@ -62,6 +62,10 @@ public class CombatController : MonoBehaviour
     #region Attack Interface
     public void Attack(InputAction.CallbackContext ctx)
     {
+        Attack();
+    }
+    public void Attack()
+    {
         if (_RangeAttack) RangeAttack();
         else RegularAttack();
     }
