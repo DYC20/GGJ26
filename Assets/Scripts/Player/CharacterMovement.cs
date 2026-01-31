@@ -55,6 +55,8 @@ namespace TarodevController
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
 
+        public Action OnDash;
+
         #endregion
 
         private float _time;
@@ -250,11 +252,12 @@ namespace TarodevController
             _isDashing = true;
             _lastDashTime = _time;
             _dashEndTime = _time + _stats.DashDuration;
-
             Vector2 dashDir = direction.x > 0f ? Vector3.right : Vector3.left;
             dashDir.Normalize();
 
             _frameVelocity = dashDir * _stats.DashSpeed;
+
+            OnDash.Invoke();
         }
 
         #endregion

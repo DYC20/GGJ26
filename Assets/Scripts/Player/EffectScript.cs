@@ -1,5 +1,6 @@
 using TarodevController;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EffectScript : MonoBehaviour
 {
@@ -8,8 +9,13 @@ public class EffectScript : MonoBehaviour
     [SerializeField] private ParticleSystem landingParticles;
 
     [Header("Combat Effects")]
-    [SerializeField] private ParticleSystem attackParticlesLeft;
-    [SerializeField] private ParticleSystem attackParticlesRight;
+    [SerializeField] private VisualEffect attackVsualEffectLeft;
+    [SerializeField] private VisualEffect attackVsualEffectRight;
+
+
+    [Header("Powerups Effects")]
+    [SerializeField] private VisualEffect DashVisualEffect;
+    [SerializeField] private VisualEffect HeavyAttackVisualEffect;
 
 
     #region Depndences
@@ -76,13 +82,14 @@ public class EffectScript : MonoBehaviour
                 Vector3 dir = characterMovement.direction.x > 0f ? Vector3.right : Vector3.left;
                 if (Vector3.Dot(dir, Vector3.right) > 0.9f)
                 {
-                    attackParticlesRight.Play();
+                    if(attackVsualEffectRight.gameObject.activeSelf == false) attackVsualEffectRight.gameObject.SetActive(true);
+                    attackVsualEffectRight.Play();
                 }
                 else
                 {
-                    attackParticlesLeft.Play();
+                    if (attackVsualEffectLeft.gameObject.activeSelf == false) attackVsualEffectLeft.gameObject.SetActive(true);
+                    attackVsualEffectLeft.Play();
                 }
-            
             };
         }
     }
@@ -94,10 +101,36 @@ public class EffectScript : MonoBehaviour
         }
     }
     #endregion
+
+    #region Powerups
+
+    private void initPowerupEffects()
+    {
+        if (_isCombatController)
+        {
+            characterMovement.OnDash += () => {
+                Vector3 dir = characterMovement.direction.x > 0f ? Vector3.right : Vector3.left;
+                if (DashVisualEffect.gameObject.activeSelf == false) DashVisualEffect.gameObject.SetActive(true);
+                if (Vector3.Dot(dir, Vector3.right) > 0.9f)
+                {
+                    DashVisualEffect.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+                    DashVisualEffect.Play();
+                }
+                else
+                {
+                    DashVisualEffect.gameObject.transform.localScale = new Vector3(-1f, 1f, 1f);
+                    DashVisualEffect.Play();
+                }
+            };
+        }
+    }
+
+    #endregion
     private void Start()
     {
         initMovementEffects();
         initCombatEffects();
+        initPowerupEffects();
     }
 
     private void Update()
