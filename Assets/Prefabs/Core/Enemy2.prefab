@@ -400,7 +400,7 @@ MonoBehaviour:
   characterLayerMask:
     serializedVersion: 2
     m_Bits: 192
-  MaskPool: {fileID: 0}
+  MaskPool: {fileID: 11400000, guid: 922d5693a07878641b1b1c7a545742e5, type: 2}
 --- !u!114 &1257762065917577370
 MonoBehaviour:
   m_ObjectHideFlags: 0
