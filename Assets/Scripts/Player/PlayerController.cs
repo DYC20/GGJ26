@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, Damageable<float>
 
     private void Awake()
     {
+        PlayerHealth.value = 1000;
         controller = GetComponent<CharacterMovement>();
         combatController = GetComponent<CombatController>();
         maskController = GetComponent<MaskController>();

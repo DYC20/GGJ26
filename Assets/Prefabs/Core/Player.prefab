@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7bc8fde8c5e84e4baa3d658d8667db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  PlayerHealth: {fileID: 11400000, guid: 750fe3a8135c1ed4fb308642d646d54e, type: 2}
 --- !u!114 &808499322147974982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   carry: {fileID: 0}
-  resurve: {fileID: 0}
+  resurve: {fileID: 11400000, guid: b0bc1fd10df6501489cd44b750aa2c50, type: 2}
   MaskPool: {fileID: 11400000, guid: 922d5693a07878641b1b1c7a545742e5, type: 2}
   InteractLayers:
     serializedVersion: 2
