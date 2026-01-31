@@ -37,9 +37,9 @@ namespace TarodevController
 
         private Vector2 lsDirection;
 
-        private Rigidbody2D _rb;
+        public Rigidbody2D _rb { get; private set; }
         private CapsuleCollider2D _col;
-        private FrameInput _frameInput;
+        public FrameInput _frameInput;
         public Vector2 _frameVelocity;
 
         private bool _cachedQueryStartInColliders;

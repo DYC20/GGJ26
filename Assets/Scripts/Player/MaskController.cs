@@ -23,9 +23,11 @@ public class MaskController : MonoBehaviour
     {
         if (maskHandler != null)
         {
-            if (resurve != null) {
+            if (resurve != null)
+            {
                 changeMask?.Invoke(false);
-                return};
+                return;
+            }
 
             carry = maskHandler.mask;
             maskHandler.mask = resurve;

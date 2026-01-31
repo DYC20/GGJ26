@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 815424164945274260, guid: c635d53543f0d0f408ca584ee8467371, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,15 +126,16 @@ GameObject:
   - component: {fileID: 1928300500264578556}
   - component: {fileID: 2588283625803481923}
   - component: {fileID: 157427978015069149}
-  - component: {fileID: 5351662188750497200}
   - component: {fileID: 808499322147974982}
   - component: {fileID: 4833781493026428888}
   - component: {fileID: 3277868645395595377}
   - component: {fileID: 8831358198444889298}
-  - component: {fileID: 2945848031006032210}
-  m_Layer: 7
-  m_Name: Player
-  m_TagString: Player
+  - component: {fileID: 1471748172962893863}
+  - component: {fileID: 4499546045525367376}
+  - component: {fileID: 1257762065917577370}
+  m_Layer: 6
+  m_Name: Enemy2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,18 +288,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5351662188750497200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3638272690297484799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7bc8fde8c5e84e4baa3d658d8667db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!114 &808499322147974982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da744427539c7bd478e4da3c13c611da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskHandler
-  currentMask: {fileID: 11400000, guid: a468c72bbfcbc77458a831c99f3365c0, type: 2}
+  currentMask: {fileID: 11400000, guid: 527a2a0d22ef82e41836f01fc3b736c2, type: 2}
 --- !u!114 &8831358198444889298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +362,7 @@ MonoBehaviour:
   HeavyattackChargeHoldVsualEffect: {fileID: 8795029236640362368}
   HeavyattackVsualEffectLeft: {fileID: 8736473292044416122}
   HeavyattackVsualEffectRight: {fileID: 8445185388391068127}
---- !u!114 &2945848031006032210
+--- !u!114 &1471748172962893863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,15 +371,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 3638272690297484799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c982c52d803a5548a51c86f94df98e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e1e1a8cc730f0546966fee4e404a692, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  carry: {fileID: 0}
-  resurve: {fileID: 0}
-  MaskPool: {fileID: 11400000, guid: 922d5693a07878641b1b1c7a545742e5, type: 2}
-  InteractLayers:
+  m_EditorClassIdentifier: Assembly-CSharp::AICharacterController2D
+  target: {fileID: 0}
+  activateDistance: 50
+  pathUpdateSeconds: 0.5
+  nextWaypointDistance: 1.2
+  jumpNodeHeightRequirement: 0.8
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
+  groundCheckDistance: 0.1
+--- !u!114 &4499546045525367376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638272690297484799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c7dd69277a974293ed5b9093903c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIController
+  health: 100
+  states: 0
+  characterLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  MaskPool: {fileID: 0}
+--- !u!114 &1257762065917577370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638272690297484799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.Seeker
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1001 &330023575830874171
 PrefabInstance:
   m_ObjectHideFlags: 0
