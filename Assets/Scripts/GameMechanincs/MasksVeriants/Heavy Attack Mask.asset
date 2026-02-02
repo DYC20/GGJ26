@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeavyAttackMask
   maskColor: {r: 1, g: 0, b: 0, a: 1}
   maskSprite: {fileID: 278347134251475957, guid: a0250444460f9544f9cc0781abec8585, type: 3}
+  Instructions: Hold Shift and Relece to Attack

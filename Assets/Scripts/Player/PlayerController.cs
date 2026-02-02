@@ -10,6 +10,8 @@ using UnityEngine.InputSystem.XR;
 public class PlayerController : MonoBehaviour, Damageable<DamageLog>
 {
     [SerializeField] FloatVariable PlayerHealth;
+    [SerializeField] float PlayerMaxHealth = 300f;
+    [SerializeField] float restoreHealthOverTime = 8;
 
     private InputSystem_Actions playerInput;
     private FrameInput _frameInput;
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour, Damageable<DamageLog>
 
     private void Awake()
     {
-        PlayerHealth.value = 1000;
         controller = GetComponent<CharacterMovement>();
         combatController = GetComponent<CombatController>();
         maskController = GetComponent<MaskController>();
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour, Damageable<DamageLog>
     }
     private void OnDisable()
     {
+        PlayerHealth.value = PlayerMaxHealth;
         playerInput.Player.Disable();
         playerInput.Player.Attack.performed -= combatController.Attack;
         playerInput.Player.Interact.started -= maskController.CollectMask;
@@ -89,6 +91,11 @@ public class PlayerController : MonoBehaviour, Damageable<DamageLog>
     void FixedUpdate()
     {
         GatherInput();
+
+        if(PlayerHealth.value <= PlayerMaxHealth)
+        {
+            PlayerHealth.value += restoreHealthOverTime * Time.deltaTime;
+        }
     }
 
     public event Action PlayerIsDead;

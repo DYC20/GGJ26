@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DashMask
   maskColor: {r: 1, g: 0.85891354, b: 0, a: 1}
   maskSprite: {fileID: 6372612021844725048, guid: a0250444460f9544f9cc0781abec8585, type: 3}
+  Instructions: Shift - To Dash

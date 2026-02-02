@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DubleJumpMask
   maskColor: {r: 0, g: 1, b: 0.0917871, a: 1}
   maskSprite: {fileID: 1720242842162135932, guid: a0250444460f9544f9cc0781abec8585, type: 3}
+  Instructions: Jump Twice In Mid Air
   speedMultiplier: 1.5

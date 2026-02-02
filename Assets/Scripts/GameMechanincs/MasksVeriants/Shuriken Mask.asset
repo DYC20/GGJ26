@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShurikenMask
   maskColor: {r: 0, g: 0.3831067, b: 1, a: 1}
   maskSprite: {fileID: 6303102012084609272, guid: a0250444460f9544f9cc0781abec8585, type: 3}
+  Instructions: Click With - Left Mouse
   ShurikcanPool: {fileID: 11400000, guid: b3b82d8732594474ebc9e2e4499f6d01, type: 2}

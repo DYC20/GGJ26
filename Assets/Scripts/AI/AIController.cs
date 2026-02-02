@@ -73,15 +73,25 @@ public class AIController : MonoBehaviour, Damageable<DamageLog>
     }
 
     private void CheckEnviorment()
-    { 
-        foreach(var a in sensors.Enviroment)
+    {
+        if (sensors.Enviroment.Length > 0)
         {
-            MaskHandler msk;
-            if(a.TryGetComponent<MaskHandler>(out msk))
+            foreach (var a in sensors.Enviroment)
             {
-                if (msk.mask != handler.mask)
+                MaskHandler msk;
+                try
                 {
-                    target = msk.gameObject;
+                    if (a.TryGetComponent<MaskHandler>(out msk))
+                    {
+                        if (msk.mask != handler.mask)
+                        {
+                            target = msk.gameObject;
+                        }
+                    }
+                }
+                catch
+                {
+                    Debug.Log("Nothihng");
                 }
             }
         }

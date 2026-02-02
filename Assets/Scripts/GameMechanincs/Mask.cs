@@ -10,6 +10,8 @@ public abstract class Mask : ScriptableObject
     public Color Color => maskColor;
     public Sprite Sprite => maskSprite;
 
+    public string Instructions;
+
     // ================= POWERUP =================
     public abstract void Activate(GameObject owner);
     public abstract void Deactivate(GameObject owner);

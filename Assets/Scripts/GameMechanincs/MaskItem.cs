@@ -3,7 +3,7 @@ using UnityEngine;
 public class MaskItem : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] private Mask maskSource;
+    [SerializeField] public Mask maskSource;
     [SerializeField] private bool StopDelete = false;
     private SpriteRenderer spriteRenderer;
     
