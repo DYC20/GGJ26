@@ -20,7 +20,7 @@ public class MaskHandler : MonoBehaviour
 
     public event Action maskChanged;
     
-    public void Awake()
+    public void OnEnable()
     {
         if (currentMask != null)
         {
@@ -35,11 +35,13 @@ public class MaskHandler : MonoBehaviour
         if (currentMask != null)
             currentMask.Deactivate(gameObject);
 
-        maskChanged?.Invoke();
+        
         currentMask = newMask;
 
         if (currentMask != null)
             currentMask.Activate(gameObject);
+
+        maskChanged?.Invoke();
     }
 
     public void ClearMask()

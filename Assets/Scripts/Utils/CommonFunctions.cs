@@ -212,6 +212,11 @@ public class CommonFunctions
         return hit;
     }
 
+    public static Vector2 get2DPosition(Vector3 Position)
+    {
+        Vector2 Pos = new Vector2(Position.x, Position.y);
+        return Pos;
+    }
 
     public static Material GetMaterialInstanceByName(MeshRenderer mr, Material originalMat)
     {

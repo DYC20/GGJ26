@@ -85,12 +85,17 @@ public class ProjactileLogic : MonoBehaviour
         if (retical) retical.SetActive(false);
         Landed.Invoke();
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != source)
         {
-
-            Damageable<float> dmg = other.GetComponent<Damageable<float>>();
+            if (other.gameObject.tag == "Ground")
+            {
+                KillProjectile();
+                return;
+            }
+            Damageable<float> dmg = other.gameObject.GetComponent<Damageable<float>>();
             if (dmg != null && other.gameObject != source)
             {
                 dmg.OnDamage(damage);

@@ -25,7 +25,7 @@ public class MaskController : MonoBehaviour
         {
             if (resurve == null)
             {
-                
+                Debug.Log("No Mask");
                 return;
             }
 
@@ -53,12 +53,20 @@ public class MaskController : MonoBehaviour
             if (dmg != null && hit.gameObject != this)
             {
                 Debug.Log("Collected: " + hit.name);
-                if(resurve != null)
+
+                if (maskHandler.mask == null)
                 {
-                    MaskItem msk = MaskPool.GetInstance(this.transform.position).gameObject.GetComponent<MaskItem>();
-                    msk.SetMask(resurve);
+                    maskHandler.EquipMask(dmg.CollectMask());
                 }
-                resurve = dmg.CollectMask();
+                else
+                {
+                    if (resurve != null)
+                    {
+                        MaskItem msk = MaskPool.GetInstance(this.transform.position).gameObject.GetComponent<MaskItem>();
+                        msk.SetMask(resurve);
+                    }
+                    resurve = dmg.CollectMask();
+                }
                 collectMask?.Invoke();
                 return;
             }

@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.XR;
 [RequireComponent(typeof(MaskController))]
 [RequireComponent(typeof(CharacterMovement))]
 [RequireComponent(typeof(CombatController))]
-public class PlayerController : MonoBehaviour, Damageable<float>
+public class PlayerController : MonoBehaviour, Damageable<DamageLog>
 {
     [SerializeField] FloatVariable PlayerHealth;
 
@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour, Damageable<float>
     {
         playerInput.Player.Disable();
         playerInput.Player.Attack.performed -= combatController.Attack;
-        playerInput.Player.Interact.performed -= maskController.CollectMask;
-        playerInput.Player.Switch.performed -= maskController.ChangeMasks;
+        playerInput.Player.Interact.started -= maskController.CollectMask;
+        playerInput.Player.Switch.started -= maskController.ChangeMasks;
 
         playerInput.Player.Powerup.started -= combatController.HeavyAttack;
         playerInput.Player.Powerup.canceled -= combatController.HeavyAttack;
@@ -86,15 +86,15 @@ public class PlayerController : MonoBehaviour, Damageable<float>
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GatherInput();
     }
 
     public event Action PlayerIsDead;
-    public void OnDamage(float log)
+    public void OnDamage(DamageLog log)
     {
-        PlayerHealth.value -= log;
+        PlayerHealth.value -= log.damageAmount;
 
         if (PlayerHealth.value < 0f)
         {

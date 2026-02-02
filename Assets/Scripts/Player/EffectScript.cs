@@ -35,6 +35,7 @@ public class EffectScript : MonoBehaviour
     #region flags
     private bool _isCharacterMovement;
     private bool _isCombatController;
+    private bool _isMaskHandler;
     private bool _isAnimator;
     #endregion
 
@@ -44,11 +45,11 @@ public class EffectScript : MonoBehaviour
     {
         _isCharacterMovement = TryGetComponent<CharacterMovement>(out characterMovement);
         _isCombatController = TryGetComponent<CombatController>(out combatcontroller);
-        maskhandler = gameObject.GetComponent<MaskHandler>();
+        _isMaskHandler = TryGetComponent<MaskHandler>(out maskhandler);
         animator = GetComponentInChildren<Animator>();
         _isAnimator = animator != null;
 
-        if(maskhandler) maskhandler.maskChanged += OnChageSprite;
+        if(_isMaskHandler) maskhandler.maskChanged += OnChageSprite;
 
     }
 
@@ -56,7 +57,10 @@ public class EffectScript : MonoBehaviour
 
     public void OnChageSprite()
     {
-        sprite.color = maskhandler.mask.Color;
+        if (maskhandler.mask != null)
+        {
+            sprite.color = maskhandler.mask.Color;
+        }
     }    
 
     private void initMovementEffects()

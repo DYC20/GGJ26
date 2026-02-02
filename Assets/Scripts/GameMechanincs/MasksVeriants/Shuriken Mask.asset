@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af27f75eb427d154c85d01baac634142, type: 3}
   m_Name: Shuriken Mask
   m_EditorClassIdentifier: Assembly-CSharp::ShurikenMask
-  maskColor: {r: 0, g: 0.07902956, b: 1, a: 1}
+  maskColor: {r: 0, g: 0.3831067, b: 1, a: 1}
   maskSprite: {fileID: 6303102012084609272, guid: a0250444460f9544f9cc0781abec8585, type: 3}
   ShurikcanPool: {fileID: 11400000, guid: b3b82d8732594474ebc9e2e4499f6d01, type: 2}

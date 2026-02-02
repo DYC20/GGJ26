@@ -14,6 +14,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] private LayerMask characterLayerMask;
     [SerializeField] public bool _RangeAttack = false;
     [SerializeField] public bool _HeavyAttack = false;
+    [SerializeField] private MaskHandler handler;
 
     private ProjactileLogic plg;
     [Header("Projectle Logic")]
@@ -35,22 +36,24 @@ public class CombatController : MonoBehaviour
             return amunition;
         }
     }
-
+    [Header("Attack")]
+    [SerializeField] private float attackDamage = 43f;
     [Header("Heavy Attack")]
     [SerializeField] private float heavyChargeTime = 1.2f;
     [SerializeField] private float heavyCooldown = 2.5f;
-    [SerializeField] private float heavyDamage = 35f;
+    [SerializeField] private float heavyDamage = 106f;
     [SerializeField] private float heavyRange = 1.8f;
 
     private float heavyChargeStart;
     private float lastHeavyAttackTime = -999f;
     public bool isChargingHeavy { get; private set; }
 
-
+    DamageLog log;
 
     void Awake()
     {
         movenet = GetComponent<CharacterMovement>();
+        handler = GetComponent<MaskHandler>();
         OnHeavyAttackCharge = () => { };
         OnHeavyAttackRelease = (a) => { };
     }
@@ -105,10 +108,16 @@ public class CombatController : MonoBehaviour
         foreach (Collider2D hit in hits)
         {
             Debug.Log("Hit: " + hit.name);
-            Damageable<float> dmg = hit.gameObject.GetComponent<Damageable<float>>();
-            if (dmg != null && hit.gameObject != this)
+            Damageable<DamageLog> dmg = hit.gameObject.GetComponent<Damageable<DamageLog>>();
+            if (dmg != null && hit.gameObject != this.gameObject)
             {
-                dmg.OnDamage(43f);
+                log = new DamageLog
+                {
+                    damageAmount = attackDamage,
+                    type = handler.mask,
+                    source = this.gameObject,
+                };
+                dmg.OnDamage(log);
             }
         }
 

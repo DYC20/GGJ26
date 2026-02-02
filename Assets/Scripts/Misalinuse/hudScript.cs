@@ -12,7 +12,7 @@ public class hudScript : MonoBehaviour
     float t = 0;
     void Update()
     {
-        scrollbar.size = playerHealth.value / 100f;
+        scrollbar.size = playerHealth.value / 1000f;
 
         if(playerHealth.value <= 0f)
         {

@@ -334,10 +334,12 @@ MonoBehaviour:
     m_Bits: 64
   _RangeAttack: 0
   _HeavyAttack: 0
+  handler: {fileID: 3277868645395595377}
   amunition: {fileID: 11400000, guid: b3b82d8732594474ebc9e2e4499f6d01, type: 2}
+  attackDamage: 36
   heavyChargeTime: 1.2
   heavyCooldown: 2.5
-  heavyDamage: 35
+  heavyDamage: 107
   heavyRange: 1.8
 --- !u!114 &3277868645395595377
 MonoBehaviour:
@@ -351,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da744427539c7bd478e4da3c13c611da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskHandler
-  currentMask: {fileID: 11400000, guid: a468c72bbfcbc77458a831c99f3365c0, type: 2}
+  currentMask: {fileID: 0}
 --- !u!114 &8831358198444889298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   carry: {fileID: 0}
-  resurve: {fileID: 11400000, guid: b0bc1fd10df6501489cd44b750aa2c50, type: 2}
+  resurve: {fileID: 0}
   MaskPool: {fileID: 11400000, guid: 922d5693a07878641b1b1c7a545742e5, type: 2}
   InteractLayers:
     serializedVersion: 2

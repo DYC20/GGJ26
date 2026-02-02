@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 815424164945274260, guid: c635d53543f0d0f408ca584ee8467371, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 1471748172962893863}
   - component: {fileID: 4499546045525367376}
   - component: {fileID: 1257762065917577370}
+  - component: {fileID: 7273296668446880083}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Untagged
@@ -322,7 +323,9 @@ MonoBehaviour:
     m_Bits: 64
   _RangeAttack: 0
   _HeavyAttack: 0
+  handler: {fileID: 3277868645395595377}
   amunition: {fileID: 11400000, guid: b3b82d8732594474ebc9e2e4499f6d01, type: 2}
+  attackDamage: 12
   heavyChargeTime: 1.2
   heavyCooldown: 2.5
   heavyDamage: 35
@@ -381,7 +384,7 @@ MonoBehaviour:
   jumpNodeHeightRequirement: 0.8
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   groundCheckDistance: 0.1
 --- !u!114 &4499546045525367376
 MonoBehaviour:
@@ -396,11 +399,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIController
   health: 100
+  nuckforce: 25
   states: 0
   characterLayerMask:
     serializedVersion: 2
     m_Bits: 192
   MaskPool: {fileID: 11400000, guid: 922d5693a07878641b1b1c7a545742e5, type: 2}
+  masks:
+  - {fileID: 11400000, guid: a468c72bbfcbc77458a831c99f3365c0, type: 2}
+  - {fileID: 11400000, guid: 2bd13b06bbdf3e74790800926e16d69a, type: 2}
+  - {fileID: 11400000, guid: b0bc1fd10df6501489cd44b750aa2c50, type: 2}
+  - {fileID: 11400000, guid: 527a2a0d22ef82e41836f01fc3b736c2, type: 2}
 --- !u!114 &1257762065917577370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +438,42 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &7273296668446880083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638272690297484799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee79a33a61b93842a0eacf84e93f100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AiSensors
+  ScanRate: 2
+  ScanLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  heightOffset: 1
+  detectionRadius: 10
+  useHeightDifference: 0
+  detectionAngle: 360
+  maxHeightDifference: 1
+  DetectTag: 
+  viewBlockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  locEnviroment:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &330023575830874171
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,6 +2,6 @@ using UnityEngine;
 public struct DamageLog
 {
     public float damageAmount;
-    public string type;
+    public Mask type;
     public GameObject source;
 }

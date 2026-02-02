@@ -4,7 +4,9 @@ public class MaskItem : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Mask maskSource;
+    [SerializeField] private bool StopDelete = false;
     private SpriteRenderer spriteRenderer;
+    
 
     private float t = 7f;
     private void Awake()
@@ -16,6 +18,10 @@ public class MaskItem : MonoBehaviour
     private void OnEnable()
     {
         t = 7f;
+        if(maskSource != null)
+        {
+            SetMask(maskSource);
+        }
     }
     public void SetMask(Mask msk)
     {
@@ -35,10 +41,13 @@ public class MaskItem : MonoBehaviour
 
     private void Update()
     {
-        t -= Time.deltaTime;
-        if (t < 0f)
+        if (!StopDelete)
         {
-            this.gameObject.SetActive(false);
+            t -= Time.deltaTime;
+            if (t < 0f)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }

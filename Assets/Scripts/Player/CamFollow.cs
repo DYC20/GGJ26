@@ -23,7 +23,7 @@ public class CamFollow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _isTarget = target != null;
         if (_isTarget)
