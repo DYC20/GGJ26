@@ -53,6 +53,16 @@ public class EffectScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Forces the effect animator to the Idle state.
+    /// Safe to call even if Awake order differs (will lazily re-fetch Animator).
+    /// </summary>
+    public void PlayIdle()
+    {
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (animator != null) animator.Play("Idle");
+    }
+
     #region Movement Effects
 
     public void OnChageSprite()

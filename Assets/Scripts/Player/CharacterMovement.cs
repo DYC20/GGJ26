@@ -74,6 +74,16 @@ namespace TarodevController
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         }
 
+        private void Start()
+        {
+            // Ensure all EffectScript animators begin in Idle
+            var effects = GetComponentsInChildren<global::EffectScript>(true);
+            foreach (var effect in effects)
+            {
+                if (effect != null) effect.PlayIdle();
+            }
+        }
+
         private void Update()
         {
             _time += Time.deltaTime;

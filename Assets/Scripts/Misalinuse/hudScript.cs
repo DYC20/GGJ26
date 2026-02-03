@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class hudScript : MonoBehaviour
     [SerializeField] private float Starthealth;
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private GameObject gameover;
+    [SerializeField] private TMP_Text gameOverText;
 
     [SerializeField] private Image ResuveMask;
     [SerializeField] private Image CurrentMask;
@@ -22,14 +24,23 @@ public class hudScript : MonoBehaviour
     [SerializeField] private TMP_Text Instructions;
 
 
+    private bool endingSequence;
+    private Coroutine endingCoroutine;
+    bool win_game = false;
+
     private void Awake()
     {
         Starthealth = playerHealth.value;
+
+        if (gameOverText == null && gameover != null)
+        {
+            gameOverText = gameover.GetComponentInChildren<TMP_Text>(true);
+        }
     }
     private void OnEnable()
     {
         playerMaskController.collectMask += UpdateMaskView;
-        playerMaskController.OnVisableMask += (a) => { pickupMassage.SetActive(a); };
+        playerMaskController.OnVisableMask += (a) => { pickupMassage.SetActive(a && !win_game); };
     }
 
     private void OnDisable()
@@ -42,6 +53,8 @@ public class hudScript : MonoBehaviour
     {
         scrollbar.size = playerHealth.value / Starthealth;
 
+        if (endingSequence) return;
+
         if(playerHealth.value <= 0f)
         {
             t += Time.deltaTime;
@@ -52,6 +65,33 @@ public class hudScript : MonoBehaviour
             }
 
         }
+    }
+
+    public void YouWin()
+    {
+        win_game = true;
+
+        if (endingCoroutine != null) return;
+        endingCoroutine = StartCoroutine(YouWinRoutine());
+    }
+
+    private IEnumerator YouWinRoutine()
+    {
+        endingSequence = true;
+
+        if (gameover != null)
+            gameover.SetActive(true);
+
+        if (gameOverText != null)
+            gameOverText.text = "YOU WIN";
+
+        yield return new WaitForSeconds(1f);
+
+        if (gameOverText != null)
+            gameOverText.text = "Thank you for playing our game\nGGJ 2026";
+
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(0);
     }
 
     private void UpdateMaskView()

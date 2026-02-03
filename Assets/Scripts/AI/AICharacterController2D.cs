@@ -55,25 +55,36 @@ public class AICharacterController2D : MonoBehaviour
     public bool _hasTarget { get; private set; }
     public bool _isEnabled { get; private set; }
     public bool _reachedTarget { get; private set; }
-    public bool _ { get; private set; }
+    
     public void SetTarget(Transform target)
     {
         this.target = target;
         _hasTarget = this.target != null;
+        _reachedTarget = false;
+        
+        if (_hasTarget && _isEnabled)
+        {
+            UpdatePath();
+        }
     }
 
     public void ClearTarget()
     {
         _hasTarget = false;
+        _reachedTarget = false;
         this.target = null;
         path = null;
         currentWaypoint = 0;
         controller.SetInput(Vector2.zero, false, false);
     }
 
-    public void EnableAgnet(bool enable)
+    public void EnableAgent(bool enable)
     {
         this._isEnabled = enable;
+        if (!enable)
+        {
+            controller.SetInput(Vector2.zero, false, false);
+        }
     }
 
     #endregion
@@ -81,13 +92,20 @@ public class AICharacterController2D : MonoBehaviour
     #region Agnet Logic
     private void FixedUpdate()
     {
-        if (!TargetInRange())
+        if (!_isEnabled)
         {
             controller.SetInput(Vector2.zero, false, false);
             return;
         }
 
-        if(_isEnabled) FollowPath();
+        if (!TargetInRange())
+        {
+            controller.SetInput(Vector2.zero, false, false);
+            _reachedTarget = true;
+            return;
+        }
+
+        FollowPath();
     }
 
     private void UpdatePath()
@@ -98,12 +116,14 @@ public class AICharacterController2D : MonoBehaviour
 
     private void FollowPath()
     {
-        _reachedTarget = (path == null || currentWaypoint >= path.vectorPath.Count);
         if (path == null || currentWaypoint >= path.vectorPath.Count)
         {
+            _reachedTarget = true;
             controller.SetInput(Vector2.zero, false, false);
             return;
         }
+
+        _reachedTarget = false;
 
         CheckGrounded();
 
@@ -140,9 +160,15 @@ public class AICharacterController2D : MonoBehaviour
 
     private bool TargetInRange()
     {
-        if(target)
-            return Vector2.Distance(rb.position, target.position) <= activateDistance;
-        return false;
+        if (target == null)
+        {
+            _hasTarget = false;
+            return false;
+        }
+        
+        bool inRange = Vector2.Distance(rb.position, target.position) <= activateDistance;
+        _hasTarget = inRange;
+        return inRange;
     }
 
     private void OnPathComplete(Path p)
